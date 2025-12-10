@@ -132,3 +132,28 @@ def save_students():
             break
     update_student_list()
     messagebox.showinfo("Sorted", "Students sorted by grade (ascending).")
+def visualize_grades():
+    #Display a bar chart of all student grades in Matplotlib.
+    # Converts stored grades into a bar plot.
+    # Ref: pyplot labels and title - https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.xlabel.html
+    # Ref: show warning box when data missing - https://docs.python.org/3/library/tkinter.messagebox.html
+    if not students:
+        messagebox.showerror("Error", "No students to visualize!")
+        return
+
+    names = [s["name"] for s in students]
+    grades = [s["grade"] for s in students]
+
+    plt.figure(figsize=(8, 5))
+    # Ref: Matplotlib figure sizing - https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.figure.html
+    # Ref: Matplotlib bar usage - https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.bar.html
+    plt.bar(names, grades, color="#79a3f0")
+    plt.xlabel("Students")
+    plt.ylabel("Grades")
+    plt.title("Student Grades")
+    plt.ylim(0, 100)
+    # Ref: clamp y-axis so 0-100 stays visible - https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.ylim.html
+    plt.tight_layout()
+    # Ref: auto-fit margins to avoid overlap - https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.tight_layout.html
+    plt.show()
+    # Ref: render the plot window - https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.show.html
