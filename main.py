@@ -199,3 +199,35 @@ def search_student():
             )
             return
     messagebox.showinfo("Not Found", f"No student found with name '{name}'.")
+def update_student():
+    #Change a student's age or grade when their name matches.
+    # Replaces stored age or grade if new values are valid.
+    name = get_entry_value(name_entry, NAME_PLACEHOLDER)
+    if not name:
+        messagebox.showerror("Error", "Enter the student's name you want to update.")
+        return
+
+    for s in students:
+        if s["name"].lower() == name.lower():
+            
+            new_age_text = get_entry_value(age_entry, AGE_PLACEHOLDER)
+            new_grade_text = get_entry_value(grade_entry, GRADE_PLACEHOLDER)
+
+            if new_age_text:
+                new_age = validate_age(new_age_text)
+                if new_age is None:
+                    return
+                s["age"] = new_age
+
+            if new_grade_text:
+                new_grade = validate_grade(new_grade_text)
+                if new_grade is None:
+                    return
+                s["grade"] = new_grade
+
+            update_student_list()
+            messagebox.showinfo("Updated", f"Student '{s['name']}' updated.")
+            clear_entries()
+            return
+
+    messagebox.showinfo("Not Found", f"No student found with name '{name}'.")
