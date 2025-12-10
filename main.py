@@ -231,3 +231,20 @@ def update_student():
             return
 
     messagebox.showinfo("Not Found", f"No student found with name '{name}'.")
+def delete_student():
+    #Remove a student from the list when the name matches.
+    # Drops the matching student and refreshes the list.
+    name = get_entry_value(name_entry, NAME_PLACEHOLDER)
+    if not name:
+        messagebox.showerror("Error", "Enter the student's name you want to delete.")
+        return
+
+    for i, s in enumerate(students):
+        if s["name"].lower() == name.lower():
+            students.pop(i)
+            update_student_list()
+            messagebox.showinfo("Deleted", f"Student '{s['name']}' deleted.")
+            clear_entries()
+            return
+
+    messagebox.showinfo("Not Found", f"No student found with name '{name}'.")
