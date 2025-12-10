@@ -305,3 +305,15 @@ title_label = tk.Label(
 )
 title_label.grid(row=0, column=0, columnspan=3, pady=(12, 6), sticky="n")
 # Ref: headline label across the top - https://tkdocs.com/tutorial/grid.html#grid-basics
+#  Input area 
+name_entry = tk.Entry(root, width=25, bg="#f3f4f6", fg="black")
+age_entry = tk.Entry(root, width=25, bg="#f3f4f6", fg="black")
+grade_entry = tk.Entry(root, width=25, bg="#f3f4f6", fg="black")
+
+name_entry.grid(row=1, column=1, padx=15, pady=8, sticky="we")
+age_entry.grid(row=2, column=1, padx=15, pady=8, sticky="we")
+grade_entry.grid(row=3, column=1, padx=15, pady=8, sticky="we")
+
+add_placeholder(name_entry, NAME_PLACEHOLDER)
+add_placeholder(age_entry, AGE_PLACEHOLDER)
+add_placeholder(grade_entry, GRADE_PLACEHOLDER)
