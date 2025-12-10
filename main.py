@@ -300,3 +300,8 @@ root.grid_columnconfigure(1, weight=3)  # input column
 root.grid_columnconfigure(2, weight=2)  # buttons column
 root.grid_rowconfigure(5, weight=1)  # allow list area to grow
 # Ref: grid weight to stretch widgets - https://docs.python.org/3/library/tkinter.html#the-grid-geometry-manager
+title_label = tk.Label(
+    root, text="Student Tracker", bg="#eef6ff", fg="#0f172a", font=("Helvetica", 20, "bold")
+)
+title_label.grid(row=0, column=0, columnspan=3, pady=(12, 6), sticky="n")
+# Ref: headline label across the top - https://tkdocs.com/tutorial/grid.html#grid-basics
