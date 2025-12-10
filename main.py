@@ -248,3 +248,39 @@ def delete_student():
             return
 
     messagebox.showinfo("Not Found", f"No student found with name '{name}'.")
+
+
+    def add_placeholder(entry, text):
+    #Add placeholder text that clears on focus and returns on blur.
+    # Ref: Tkinter focus bindings - https://docs.python.org/3/library/tkinter.html#bindings-and-events
+    # Ref: Entry insert default text - https://docs.python.org/3/library/tkinter.html#tkinter.Entry.insert
+    entry.insert(0, text)
+    entry.config(fg="#707070")
+
+    def on_focus_in(event):
+        if entry.get() == text:
+            entry.delete(0, tk.END)
+            entry.config(fg="#000000")
+
+    def on_focus_out(event):
+        if not entry.get():
+            entry.insert(0, text)
+            entry.config(fg="#707070")
+
+    entry.bind("<FocusIn>", on_focus_in)
+    entry.bind("<FocusOut>", on_focus_out)
+
+
+def restore_placeholder(entry, text):
+    #Reapply placeholder text if an entry is empty.
+    if not entry.get():
+        entry.insert(0, text)
+        entry.config(fg="#707070")
+
+
+def reset_placeholders():
+    #Restore placeholder text for every entry box that is empty.
+    restore_placeholder(name_entry, NAME_PLACEHOLDER)
+    restore_placeholder(age_entry, AGE_PLACEHOLDER)
+    restore_placeholder(grade_entry, GRADE_PLACEHOLDER)
+    # Ref: DRY reuse of helper functions - https://docs.python.org/3/glossary.html#term-dry
