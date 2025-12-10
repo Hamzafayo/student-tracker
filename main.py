@@ -317,3 +317,62 @@ grade_entry.grid(row=3, column=1, padx=15, pady=8, sticky="we")
 add_placeholder(name_entry, NAME_PLACEHOLDER)
 add_placeholder(age_entry, AGE_PLACEHOLDER)
 add_placeholder(grade_entry, GRADE_PLACEHOLDER)
+button_frame = tk.Frame(root, bg="#eef6ff")
+button_frame.grid(row=1, column=2, rowspan=4, padx=20, pady=5, sticky="n")
+# Ref: vertical button stack with grid - https://docs.python.org/3/library/tkinter.html#the-packer-and-grid
+
+button_specs = [
+    ("Add Student", add_student),
+    ("Save Students", save_students),
+    ("Sort by Grade", bubble_sort_students),
+    ("Visualize Grades", visualize_grades),
+    ("Show Average", show_average),
+    ("Search Student", search_student),
+    ("Update Student", update_student),
+    ("Delete Student", delete_student),
+    ("Exit", exit_app),
+]
+
+for i, (text, cmd) in enumerate(button_specs):
+    tk.Button(
+        button_frame,
+        text=text,
+        command=cmd,
+        bg="#cde4ff",
+        fg="#0f172a",
+        activebackground="#b7d3f5",
+        relief="ridge",
+        padx=6,
+        pady=4,
+    ).grid(
+        row=i, column=0, sticky="we", pady=3
+    )
+    # Ref: grid each button with padding - https://tkdocs.com/tutorial/grid.html#grid-basics
+
+
+list_frame = tk.Frame(root, bg="#eef6ff")
+list_frame.grid(row=5, column=0, columnspan=3, padx=10, pady=10, sticky="nsew")
+list_frame.grid_columnconfigure(0, weight=1)
+
+scrollbar = tk.Scrollbar(list_frame)
+scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+
+student_listbox = tk.Listbox(
+    list_frame,
+    width=70,
+    yscrollcommand=scrollbar.set,
+    bg="white",
+    fg="#0f172a",
+    highlightthickness=1,
+    selectbackground="#cde4ff",
+)
+student_listbox.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+# Ref: Listbox + Scrollbar pack expand - https://tkdocs.com/tutorial/morewidgets.html#listbox
+
+scrollbar.config(command=student_listbox.yview)
+# Ref: configure scrollbar command to sync scrolling - https://docs.python.org/3/library/tkinter.html#tkinter.Scrollbar.config
+
+
+root.mainloop()
+# Ref: Tk main loop to run the UI - https://docs.python.org/3/library/tkinter.html#tkinter.Tk.mainloop
+
