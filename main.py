@@ -102,3 +102,33 @@ age = validate_age(age_text)
     clear_entries()
     update_student_list()
 
+def save_students():
+    #Write all students to students.txt as a CSV safely.
+    # Writes rows to a CSV file with a header line.
+    try:
+        with open(STUDENTS_FILE, "w", newline="") as f:
+            writer = csv.writer(f)
+            # Ref: csv.writer usage - https://docs.python.org/3/library/csv.html#csv.writer
+            writer.writerow(["name", "age", "grade"])
+            for s in students:
+                writer.writerow([s["name"], s["age"], s["grade"]])
+        messagebox.showinfo("Saved", f"Students saved to {STUDENTS_FILE}")
+    except OSError as exc:
+        messagebox.showerror("File Error", f"Could not save file: {exc}")
+
+        def bubble_sort_students():
+    #Sort students by grade with a bubble sort pass until sorted.
+    # Swaps adjacent grades until the list is ordered.
+    # Ref: bubble sort swap idea - https://en.wikipedia.org/wiki/Bubble_sort
+    n = len(students)
+   
+    for i in range(n):
+        swapped = False
+        for j in range(0, n - i - 1):
+            if students[j]["grade"] > students[j + 1]["grade"]:
+                students[j], students[j + 1] = students[j + 1], students[j]
+                swapped = True
+        if not swapped:
+            break
+    update_student_list()
+    messagebox.showinfo("Sorted", "Students sorted by grade (ascending).")
