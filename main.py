@@ -64,3 +64,12 @@ def get_entry_value(entry, placeholder):
     if value == placeholder:
         return ""
     return value
+
+def clear_entries():
+    #Wipe entry boxes and restore placeholder text after actions finish.
+    # Empties fields so the next action starts clean.
+    # Ref: Entry.delete clears text - https://docs.python.org/3/library/tkinter.html#tkinter.Entry.delete
+    name_entry.delete(0, tk.END)
+    age_entry.delete(0, tk.END)
+    grade_entry.delete(0, tk.END)
+    reset_placeholders()
