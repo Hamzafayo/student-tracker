@@ -90,6 +90,15 @@ def clear_entries():
     if any(s["name"].lower() == name.lower() for s in students):
         messagebox.showerror("Error", f"A student named '{name}' already exists.")
         return
+    
+age = validate_age(age_text)
+    grade = validate_grade(grade_text)
+    if age is None or grade is None:
+        return  
 
+    students.append({"name": name, "age": age, "grade": grade})
+    messagebox.showinfo("Success", f"Student '{name}' added!")
 
+    clear_entries()
+    update_student_list()
 
