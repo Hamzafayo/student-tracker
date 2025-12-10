@@ -289,4 +289,14 @@ def exit_app():
     # Ref: closing a Tk app with destroy - https://docs.python.org/3/library/tkinter.html#tkinter.Tk.destroy
     # Ref: common exit button pattern - https://tkdocs.com/tutorial/windows.html#dialogs
     root.destroy()
- 
+ root = tk.Tk()
+root.title("Student Tracker")
+root.configure(bg="#eef6ff") 
+root.option_add("*Font", ("Helvetica", 13))
+root.option_add("*Button.Font", ("Helvetica", 12, "bold"))
+root.option_add("*Entry.Font", ("Helvetica", 13))
+root.grid_columnconfigure(0, weight=1)  # spacer column
+root.grid_columnconfigure(1, weight=3)  # input column
+root.grid_columnconfigure(2, weight=2)  # buttons column
+root.grid_rowconfigure(5, weight=1)  # allow list area to grow
+# Ref: grid weight to stretch widgets - https://docs.python.org/3/library/tkinter.html#the-grid-geometry-manager
