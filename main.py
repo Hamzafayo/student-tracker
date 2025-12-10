@@ -91,7 +91,7 @@ def clear_entries():
         messagebox.showerror("Error", f"A student named '{name}' already exists.")
         return
     
-age = validate_age(age_text)
+    age = validate_age(age_text)
     grade = validate_grade(grade_text)
     if age is None or grade is None:
         return  
@@ -157,7 +157,7 @@ def visualize_grades():
     # Ref: auto-fit margins to avoid overlap - https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.tight_layout.html
     plt.show()
     # Ref: render the plot window - https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.show.html
-  def recursive_average(grades, n=None):
+ def recursive_average(grades, n=None):
     #Use recursion to calculate the average value across a list.
     # Combines prior sums with the new grade to find mean.
     # Ref: cumulative moving average formula - https://en.wikipedia.org/wiki/Moving_average#Cumulative_moving_average
@@ -181,3 +181,21 @@ def show_average():
     grades = [s["grade"] for s in students]
     avg = recursive_average(grades)
     messagebox.showinfo("Average", f"Average grade: {avg:.2f}")
+    def search_student():
+def search_student():
+    #Find a student by name without caring about letter case.
+    # Looks for a matching name and shows details when found.
+    # Ref: raise messagebox for missing input - https://docs.python.org/3/library/tkinter.messagebox.html#tkinter.messagebox.showerror
+    name = get_entry_value(name_entry, NAME_PLACEHOLDER)
+    if not name:
+        messagebox.showerror("Error", "Enter a name to search in the Name field.")
+        return
+
+    for s in students:  
+        if s["name"].lower() == name.lower():
+            messagebox.showinfo(
+                "Found",
+                f"Found: {s['name']}  |  Age: {s['age']}  |  Grade: {s['grade']}",
+            )
+            return
+    messagebox.showinfo("Not Found", f"No student found with name '{name}'.")
