@@ -73,3 +73,23 @@ def clear_entries():
     age_entry.delete(0, tk.END)
     grade_entry.delete(0, tk.END)
     reset_placeholders()
+
+
+    def add_student():
+    #Add a new student using entered name, age, and grade values.
+    # Validates inputs, prevents duplicates, then stores the student.
+    name = get_entry_value(name_entry, NAME_PLACEHOLDER)
+    age_text = get_entry_value(age_entry, AGE_PLACEHOLDER)
+    grade_text = get_entry_value(grade_entry, GRADE_PLACEHOLDER)
+
+    if not name or not age_text or not grade_text:
+        messagebox.showerror("Error", "All fields (Name, Age, Grade) are required!")
+        return
+
+    # Ref: avoid duplicate names by comparing lowered strings - https://docs.python.org/3/library/stdtypes.html#str.lower
+    if any(s["name"].lower() == name.lower() for s in students):
+        messagebox.showerror("Error", f"A student named '{name}' already exists.")
+        return
+
+
+
