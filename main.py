@@ -284,3 +284,9 @@ def reset_placeholders():
     restore_placeholder(age_entry, AGE_PLACEHOLDER)
     restore_placeholder(grade_entry, GRADE_PLACEHOLDER)
     # Ref: DRY reuse of helper functions - https://docs.python.org/3/glossary.html#term-dry
+def exit_app():
+    #Close the application window and end the program.
+    # Ref: closing a Tk app with destroy - https://docs.python.org/3/library/tkinter.html#tkinter.Tk.destroy
+    # Ref: common exit button pattern - https://tkdocs.com/tutorial/windows.html#dialogs
+    root.destroy()
+ 
