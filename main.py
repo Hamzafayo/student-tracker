@@ -157,3 +157,27 @@ def visualize_grades():
     # Ref: auto-fit margins to avoid overlap - https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.tight_layout.html
     plt.show()
     # Ref: render the plot window - https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.show.html
+  def recursive_average(grades, n=None):
+    #Use recursion to calculate the average value across a list.
+    # Combines prior sums with the new grade to find mean.
+    # Ref: cumulative moving average formula - https://en.wikipedia.org/wiki/Moving_average#Cumulative_moving_average
+    if n is None:
+        n = len(grades)
+    # Ref: handle empty list early - https://docs.python.org/3/library/stdtypes.html#truth-value-testing
+    if n == 0:
+        return 0
+    if n == 1:
+        return grades[0]
+    return (recursive_average(grades, n - 1) * (n - 1) + grades[n - 1]) / n
+
+
+def show_average():
+    #Show the average grade of every stored student together.
+    # Calculates and displays the current mean grade.
+    if not students:
+        messagebox.showinfo("Average", "No students to calculate average.")
+        return
+
+    grades = [s["grade"] for s in students]
+    avg = recursive_average(grades)
+    messagebox.showinfo("Average", f"Average grade: {avg:.2f}")
