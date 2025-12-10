@@ -43,3 +43,24 @@ def validate_grade(grade_text):
         messagebox.showerror("Error", "Grade must be between 0 and 100!")
         return None
     return grade
+
+def update_student_list():
+    #Refresh the listbox with every student's name, age, and grade.
+    # Keeps the on-screen list in sync with the students data.
+    # Ref: Tkinter Listbox insert pattern - https://docs.python.org/3/library/tkinter.html#tkinter.Listbox.insert
+    student_listbox.delete(0, tk.END)
+    for s in students:
+        student_listbox.insert(
+            tk.END,
+            f"{s['name']}  |  Age: {s['age']}  |  Grade: {s['grade']}",
+        )
+
+
+def get_entry_value(entry, placeholder):
+    #Return entry value unless it equals the placeholder text shown.
+    # Pulls user text but ignores placeholder prompts.
+    # Ref: strip whitespace - https://docs.python.org/3/library/stdtypes.html#str.strip
+    value = entry.get().strip()
+    if value == placeholder:
+        return ""
+    return value
